@@ -1,9 +1,11 @@
 import { defineConfig } from "umi";
 
 export default defineConfig({
-  routes: [
-    { path: "/", component: "index" },
-    { path: "/docs", component: "docs" },
+  scripts: [
+    '/Cesium/Cesium.js'
+  ],
+  links: [
+    { href: '/Cesium/Widgets/widgets.css', rel: 'stylesheet' }
   ],
   npmClient: 'pnpm',
 });

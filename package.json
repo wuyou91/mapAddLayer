@@ -9,6 +9,8 @@
     "start": "npm run dev"
   },
   "dependencies": {
+    "@amap/amap-jsapi-loader": "^1.0.1",
+    "react-vant": "^3.3.1",
     "umi": "^4.0.73"
   },
   "devDependencies": {
