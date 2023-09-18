@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@amap/amap-jsapi-loader": "^1.0.1",
+    "@turf/turf": "^6.5.0",
     "react-vant": "^3.3.1",
     "umi": "^4.0.73"
   },

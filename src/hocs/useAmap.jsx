@@ -8,8 +8,8 @@ export default function ({ id, mapConfig }) {
             mapRef.current = new AMap.Map(id, mapConfig || {
                 // 设置地图容器id
                 viewMode: '2D', // 是否为3D地图模式
-                zoom: 4, // 初始化地图级别
-                center: [105.602725, 37.076636], // 初始化地图中心点位置
+                zoom: 12, // 初始化地图级别
+                center: [114.056468, 22.571944], // 初始化地图中心点位置
             });
         }
 
