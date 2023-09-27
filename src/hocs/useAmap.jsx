@@ -9,6 +9,7 @@ export default function ({ id, mapConfig }) {
                 // 设置地图容器id
                 viewMode: '2D', // 是否为3D地图模式
                 zoom: 12, // 初始化地图级别
+                mapStyle: 'amap://styles/whitesmoke',
                 center: [114.056468, 22.571944], // 初始化地图中心点位置
             });
         }
