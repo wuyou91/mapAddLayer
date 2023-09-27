@@ -9,13 +9,28 @@ export default function () {
 
     const line = useRef(null)
     const path = useRef([])
-    const area = useRef(null)
+    const marker = useRef(null)
+
+    const polylineEditor = useRef()
     useEffect(() => {
+        polylineEditor.current = new AMap.PolylineEditor(mapRef.current)
         mapRef.current.on('click', e => {
-            console.log(e)
-            path.current.push(e.lnglat)
+            if (path.current.length <= 0) {
+                marker.current = new AMap.Marker({
+                    map: mapRef.current,
+                    position: e.lnglat
+                })
+            } else {
+                marker.current && mapRef.current.remove(marker.current)
+            }
+            if (path.current.length >= 2) {
+                const arr = polylineEditor.current.getTarget().getPath()
+                path.current = [...arr, e.lnglat]
+            } else {
+                path.current.push(e.lnglat)
+            }
             if (!line.current) {
-                line.current = new window.AMap.Polyline({
+                line.current = new AMap.Polyline({
                     strokeColor: "#3366FF",
                     strokeWeight: 4,
                 })
@@ -23,37 +38,23 @@ export default function () {
             }
             if (path.current.length >= 2) {
                 line.current.setPath(path.current)
+                polylineEditor.current.setTarget(line.current)
+                polylineEditor.current.open()
             }
         })
     }, [])
-
     const close = () => {
-        mapRef.current.remove(line.current)
-        mapRef.current.remove(area.current)
+        polylineEditor.current.close()
+        mapRef.current.clearMap()
         line.current = null
         path.current = []
-        area.current = null
-    }
-    const offset = () => {
-        if (!line.current || line.current.length < 2 || area.current) return
-        const path = line.current.getPath().map(x => x.toArray())
-        const source = turf.lineString(path, { "stroke": "#F00" });
-        const offsetLine1 = turf.lineOffset(source, 200, { units: 'meters' });
-        const offsetLine2 = turf.lineOffset(source, -200, { units: 'meters' });
-        const line1 = offsetLine1.geometry.coordinates
-        const line2 = offsetLine2.geometry.coordinates.reverse()
-        area.current = new window.AMap.Polygon({
-            map: mapRef.current,
-            path: [...line1, ...line2],
-            strokeColor: "#3366FF",
-            strokeWeight: 4,
-        })
+        marker.current = null
+        // mapRef.current.remove(polylineEditor.current)
     }
     return <div className={styles.page}>
         <div id='amap-container' style={{ width: '100%', height: '100%' }}></div>
         <div className={styles.tool}>
             <div className={active === 'polyline' ? styles.toolItem + ' ' + styles.active : styles.toolItem} onClick={() => setActive('polyline')}>线</div>
-            <div className={active === 'polygon' ? styles.toolItem + ' ' + styles.active : styles.toolItem} onClick={offset}>偏</div>
             <div className={active === 'close' ? styles.toolItem + ' ' + styles.active : styles.toolItem} onClick={close}>清</div>
         </div>
     </div>
