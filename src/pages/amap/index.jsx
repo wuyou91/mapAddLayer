@@ -13,7 +13,6 @@ export default function () {
 
     const polylineEditor = useRef()
     useEffect(() => {
-        polylineEditor.current = new AMap.PolylineEditor(mapRef.current)
         mapRef.current.on('click', e => {
             if (path.current.length <= 0) {
                 marker.current = new AMap.Marker({
@@ -24,8 +23,7 @@ export default function () {
                 marker.current && mapRef.current.remove(marker.current)
             }
             if (path.current.length >= 2) {
-                const arr = polylineEditor.current.getTarget().getPath()
-                path.current = [...arr, e.lnglat]
+                path.current = [...path.current, e.lnglat]
             } else {
                 path.current.push(e.lnglat)
             }
@@ -38,8 +36,6 @@ export default function () {
             }
             if (path.current.length >= 2) {
                 line.current.setPath(path.current)
-                polylineEditor.current.setTarget(line.current)
-                polylineEditor.current.open()
             }
         })
     }, [])

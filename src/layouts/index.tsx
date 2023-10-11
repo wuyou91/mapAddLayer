@@ -8,6 +8,7 @@ export default function Layout() {
       <div className={styles.navs}>
         <Link to='/amap' className={styles.navItem}>高德</Link>
         <Link to='/cesiumMap' className={styles.navItem}>cesium</Link>
+        <Link to='/test' className={styles.navItem}>test</Link>
       </div>
       <Outlet />
     </div>

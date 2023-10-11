@@ -16,18 +16,18 @@ export default function ({ id, mapConfig }) {
 
         return () => {
             // 销毁地图及webgl
-            let dom = document.getElementById(id)
-            let canvas = dom?.getElementsByTagName('canvas')
-            if (canvas) {
-                let gl = canvas.getContext('webgl')
-                gl.canvas.width = 0
-                gl.canvas.height = 0
-                gl.getExtension('WEBGL_lose_context').loseContext()
-            }
+            // let dom = document.getElementById(id)
+            // let canvas = dom?.getElementsByTagName('canvas')
+            // if (canvas) {
+            //     let gl = canvas.getContext('webgl')
+            //     gl.canvas.width = 0
+            //     gl.canvas.height = 0
+            //     gl.getExtension('WEBGL_lose_context').loseContext()
+            // }
             mapRef.current && mapRef.current.destroy()
             mapRef.current = null
-            canvas = null
-            dom = null
+            // canvas = null
+            // dom = null
         }
     }, [])
 
