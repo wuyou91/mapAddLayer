@@ -5,7 +5,7 @@ export default function HomePage() {
     new Cesium.Viewer('cesiumMap-container')
   }, [])
   return (
-    <div style={{ width: "100%", height: "100vh", paddingTop: '50px', boxSizing: 'border-box' }} id='cesiumMap-container'>
+    <div style={{ width: "100%", height: "100%", boxSizing: 'border-box' }} id='cesiumMap-container'>
     </div>
   );
 }
