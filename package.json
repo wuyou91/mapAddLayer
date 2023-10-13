@@ -14,7 +14,8 @@
     "antd-mobile": "^5.32.4",
     "antd-mobile-icons": "^0.3.0",
     "react-vant": "^3.3.1",
-    "umi": "^4.0.73"
+    "umi": "^4.0.73",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.18",
